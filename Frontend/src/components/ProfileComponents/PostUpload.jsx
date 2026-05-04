@@ -4,7 +4,7 @@ import PostForm from "./PostForm";
 import toast from "react-hot-toast";
 import { uploadPost } from "../../lib/api";
 import useAuthUser from "../../hooks/useAuthUser";
-import { uploadToCloudinary } from "../../hooks/UploadToCloudinary";
+import { uploadToCloudinary } from "../../hooks/useCloudinary";
 
 const PostUpload = () => {
   const queryClient = useQueryClient();

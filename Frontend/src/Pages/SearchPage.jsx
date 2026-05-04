@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { Search, X, Loader2 } from 'lucide-react';
-import { searchPeople } from '../lib/api';
-import SearchResults from '../components/Search Components/SearchResults.jsx';
+import React, { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Search, X, Loader2 } from "lucide-react";
+import { searchPeople } from "../lib/api";
+import SearchResults from "../components/SearchComponents/SearchResults.jsx";
 
 // --- Search Input ---
 const SearchInput = ({ value, onChange, onClear, isLoading }) => (
@@ -33,8 +33,8 @@ const SearchInput = ({ value, onChange, onClear, isLoading }) => (
 
 // --- Main Page ---
 const SearchPage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [debouncedTerm, setDebouncedTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  const [debouncedTerm, setDebouncedTerm] = useState("");
 
   useEffect(() => {
     const handler = setTimeout(() => setDebouncedTerm(searchTerm), 500);
@@ -42,14 +42,14 @@ const SearchPage = () => {
   }, [searchTerm]);
 
   const { data, isLoading, isError, isFetched, error } = useQuery({
-    queryKey: ['searchPeople', debouncedTerm],
+    queryKey: ["searchPeople", debouncedTerm],
     queryFn: () => searchPeople(debouncedTerm),
     enabled: debouncedTerm.length > 0,
     retry: false,
   });
 
   const results = Array.isArray(data) ? data : [];
-  const clearSearch = () => setSearchTerm('');
+  const clearSearch = () => setSearchTerm("");
 
   return (
     <div className="bg-base-100">
@@ -57,8 +57,12 @@ const SearchPage = () => {
       <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-b border-base-200">
         <div className="container mx-auto px-4 py-12">
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">Find Your People</h1>
-            <p className="text-base-content/60 text-sm">Search by name to discover community members</p>
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">
+              Find Your People
+            </h1>
+            <p className="text-base-content/60 text-sm">
+              Search by name to discover community members
+            </p>
           </div>
           <SearchInput
             value={searchTerm}

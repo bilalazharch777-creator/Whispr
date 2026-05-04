@@ -2,7 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getStory, likeStory } from "../../lib/api";
 import { useEffect, useRef, useState } from "react";
 
-const STORY_DURATION = 30000; // 30 seconds
+const STORY_DURATION = 60000; // 30 seconds
 
 const StoryPage = ({ storyId, onClose }) => {
   const queryClient = useQueryClient();

@@ -3,13 +3,13 @@ import { useParams } from "react-router"; // Import useParams
 import { useQuery } from "@tanstack/react-query";
 import { getUserPosts, getUserProfile } from "../lib/api"; // Added getUserProfile for others
 
-import ProfileHeader from "../components/Profile Components/ProfileHeader";
-import ProfileBio from "../components/Profile Components/ProfileBio";
+import ProfileHeader from "../components/ProfileComponents/ProfileHeader";
+import ProfileBio from "../components/ProfileComponents/ProfileBio";
 import useAuthUser from "../hooks/useAuthUser";
-import PostUpload from "../components/Profile Components/PostUpload";
-import PostCard from "../components/Profile Components/PostCard";
-import OwnerActionButtons from "../components/Profile Components/OwnerActionButtons";
-import VisitorActionButtons from "../components/Profile Components/VisitorActionButtons";
+import PostUpload from "../components/ProfileComponents/PostUpload";
+import PostCard from "../components/ProfileComponents/PostCard";
+import OwnerActionButtons from "../components/ProfileComponents/OwnerActionButtons";
+import VisitorActionButtons from "../components/ProfileComponents/VisitorActionButtons";
 
 const ProfilePage = () => {
   const { id: urlId } = useParams(); // Extract ID from URL

@@ -5,8 +5,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { completeOnboarding } from "../lib/api";
 import toast from "react-hot-toast";
 import { Navigate } from "react-router";
-import ImageUpload from "../components/Onboarding Components/ImageUpload";
-import OnboardingForm from "../components/Onboarding Components/OnboardingForm";
+import ImageUpload from "../components/OnboardingComponents/ImageUpload";
+import OnboardingForm from "../components/OnboardingComponents/OnboardingForm";
 
 const OnboardingPage = () => {
   const { authUser } = useAuthUser();

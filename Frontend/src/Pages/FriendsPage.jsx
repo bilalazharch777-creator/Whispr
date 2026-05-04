@@ -15,9 +15,9 @@ import {
   useQueryClient,
   useInfiniteQuery,
 } from "@tanstack/react-query";
-import AllFriendsSection from "../components/friends components/AllFriends";
-import FriendSuggestions from "../components/friends components/FriendSuggestions";
-import PendingFriends from "../components/friends components/PendingFriends";
+import AllFriendsSection from "../components/FriendsComponents/AllFriends";
+import FriendSuggestions from "../components/FriendsComponents/FriendSuggestions";
+import PendingFriends from "../components/FriendsComponents/PendingFriends";
 import {
   getRecommendedUsers,
   getUserFriends,

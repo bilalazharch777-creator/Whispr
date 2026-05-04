@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Video, Upload, X } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { uploadStory } from "../../lib/api";
-import { uploadToCloudinary } from "../../hooks/UploadtoCloudinary";
+import { uploadToCloudinary } from "../../hooks/useCloudinary";
 import toast from "react-hot-toast";
 
 const StoryModal = ({ isOpen, onClose }) => {

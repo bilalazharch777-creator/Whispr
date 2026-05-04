@@ -3,8 +3,8 @@ import { Chat } from "stream-chat-react";
 import toast from "react-hot-toast";
 import { useLocation } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
-import ChatList from "../components/Chat Components/ChatList";
-import ChatBox from "../components/Chat Components/ChatBox";
+import ChatList from "../components/ChatComponents/ChatList";
+import ChatBox from "../components/ChatComponents/ChatBox";
 import ChatLoader from "../components/ChatLoader";
 import Layout from "../components/Layout"; // Import your Layout component
 import { MessageCircle } from "lucide-react";

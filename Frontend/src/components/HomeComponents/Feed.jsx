@@ -1,7 +1,7 @@
 import React from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { postFeed } from "../../lib/api";
-import PostCard from "../Profile Components/PostCard";
+import PostCard from "../ProfileComponents/PostCard";
 
 const Feed = () => {
   const {

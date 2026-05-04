@@ -1,6 +1,4 @@
-import { Routes } from "react-router";
-import { Route } from "react-router";
-import { Navigate } from "react-router";
+import { Routes, Route, Navigate } from "react-router";
 import HomePage from "./Pages/HomePage.jsx";
 import LoginPage from "./Pages/LoginPage.jsx";
 import SignUpPage from "./Pages/SignUpPage.jsx";
@@ -8,8 +6,8 @@ import OnboardingPage from "./Pages/OnboardingPage.jsx";
 import NotificationsPage from "./Pages/NotificationsPage.jsx";
 import FriendsPage from "./Pages/FriendsPage.jsx";
 import ChatPage from "./Pages/ChatPage.jsx";
-import ChatSidebar from "./components/Chat Components/ChatList.jsx";
-import ChatBox from "./components/Chat Components/ChatBox.jsx";
+import ChatSidebar from "./components/ChatComponents/ChatList.jsx";
+import ChatBox from "./components/ChatComponents/ChatBox.jsx";
 import CallPage from "./Pages/CallPage.jsx";
 import ProfilePage from "./Pages/ProfilePage.jsx";
 import { Toaster } from "react-hot-toast";

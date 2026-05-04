@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Upload, Sparkles, UserCircle } from "lucide-react";
 import toast from "react-hot-toast";
-import { uploadToCloudinary } from "../../hooks/UploadtoCloudinary";
+import { uploadToCloudinary } from "../../hooks/useCloudinary";
 
 const ImageUpload = ({
   profilePic,
