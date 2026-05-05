@@ -12,19 +12,15 @@ import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 5001;
-app.use("/public", express.static("public")); // for avatars
 
+// CORS must be FIRST before everything
 app.use(
   cors({
     origin: function (origin, callback) {
-      const allowedOrigins = [
-        "http://localhost:5173",
-        "https://whispr-z55k.vercel.app",
-      ];
       if (
         !origin ||
-        allowedOrigins.includes(origin) ||
-        origin.endsWith(".vercel.app")
+        origin.endsWith(".vercel.app") ||
+        origin === "http://localhost:5173"
       ) {
         callback(null, true);
       } else {
@@ -34,8 +30,13 @@ app.use(
     credentials: true,
   }),
 );
+
+app.options("*", cors()); // handle preflight requests
+
 app.use(express.json());
 app.use(cookieParser());
+
+app.use("/public", express.static("public")); // for avatars
 
 app.use("/api/auth/", authRoutes);
 app.use("/api/users/", userRoutes);
