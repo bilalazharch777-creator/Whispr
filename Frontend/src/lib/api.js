@@ -1,16 +1,24 @@
 import { axiosInstance } from "./axios";
 
 export const signup = async (signupData) => {
-  console.log("signup data:", signupData);
-  console.log(axiosInstance + "/auth/signup");
-
-  const response = await axiosInstance.post("/auth/signup", signupData);
-  return response.data;
+  try {
+    const response = await axiosInstance.post("auth/signup", signupData);
+    return response;
+  } catch (error) {
+    console.log("server error message:", error);
+  }
 };
 
 export const login = async (loginData) => {
-  const response = await axiosInstance.post("/auth/login", loginData);
-  return response.data;
+  try {
+    console.log(loginData);
+    const response = await axiosInstance.post("auth/login", loginData);
+    console.log("login successfull", loginData);
+
+    return response;
+  } catch (error) {
+    console.log("server error message:", error);
+  }
 };
 export const logout = async () => {
   try {
@@ -23,11 +31,15 @@ export const logout = async () => {
 };
 
 export const getAuthUser = async () => {
-  const response = await axiosInstance.get("/auth/me");
-  console.log(response.data);
-  return response.data;
+  try {
+    const response = await axiosInstance.get("/auth/me");
+    return response.data;
+  } catch (error) {
+    console.log("server error for login:", error);
+    // CRITICAL: Throw the error so TanStack Query handles it correctly
+    throw error;
+  }
 };
-
 export const completeOnboarding = async (userData) => {
   const response = await axiosInstance.post("/auth/onboarding", userData);
   console.log(userData);
