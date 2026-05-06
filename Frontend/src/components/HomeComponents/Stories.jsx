@@ -1,14 +1,27 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getFeed } from "../../lib/api";
+import { getFeed, getRecommendedStory } from "../../lib/api";
 import useAuthUser from "../../hooks/useAuthUser";
 import { getProfileImageSrc } from "../../lib/imageHelper";
+
 const Stories = ({ onStoryClick }) => {
   const { authUser } = useAuthUser();
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["story-feed"],
     queryFn: getFeed,
   });
+
+  const totalStories =
+    (data?.myStory ? 1 : 0) + (data?.friendsStories?.length || 0);
+  const needsSuggestions = !isLoading && !isError && totalStories <= 5;
+
+  const { data: suggestedUsers } = useQuery({
+    queryKey: ["recommended-story"],
+    queryFn: getRecommendedStory,
+    enabled: needsSuggestions,
+  });
+
   if (isLoading) {
     return (
       <div className="flex gap-4 p-4 overflow-x-auto hide-scrollbar">
@@ -30,7 +43,7 @@ const Stories = ({ onStoryClick }) => {
     );
 
   return (
-    <div className="flex gap-4 p-4 overflow-x-auto no-scrollbar bg-base-100 border-white/5">
+    <div className="flex gap-4 p-4 overflow-x-auto hide-scrollbar bg-base-100 border-white/5">
       {/* My Story / Add Story Circle */}
       {data?.myStory ? (
         <StoryCircle
@@ -57,9 +70,43 @@ const Stories = ({ onStoryClick }) => {
           onClick={() => onStoryClick(friendStory.storyId)}
         />
       ))}
+
+      {/* Suggested Users (only when ≤5 stories) */}
+      {needsSuggestions &&
+        suggestedUsers?.map((user) => (
+          <SuggestedUserCircle
+            key={user._id}
+            user={user}
+            getImageSrc={getProfileImageSrc}
+          />
+        ))}
     </div>
   );
 };
+
+const SuggestedUserCircle = ({ user, getImageSrc }) => (
+  <div className="group flex flex-col items-center gap-1 cursor-pointer flex-shrink-0">
+    <div className="relative p-[2.5px] rounded-full bg-white/10 transition-transform group-hover:scale-105 active:scale-95 hide-scollbar">
+      <div className="bg-base-100 p-[2px] rounded-full">
+        <img
+          src={getImageSrc(user.profilePic)}
+          alt={user.fullName}
+          className="w-20 h-20 rounded-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+          onError={(e) => {
+            e.target.src = "/avatar.png";
+          }}
+        />
+      </div>
+      {/* Plus badge */}
+      <div className="absolute bottom-0 right-0 w-6 h-6 rounded-full bg-white border-2 border-base-100 flex items-center justify-center text-black font-bold text-xs shadow">
+        +
+      </div>
+    </div>
+    <span className="text-[11px] font-medium opacity-80 max-w-[80px] truncate text-center">
+      {user.fullName?.split(" ")[0]}
+    </span>
+  </div>
+);
 
 const AddStoryCircle = ({ onClick, user, getImageSrc }) => (
   <div

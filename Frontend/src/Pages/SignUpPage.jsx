@@ -11,6 +11,7 @@ import {
   Lock,
   CheckCircle,
   Sparkles,
+  LogIn,
 } from "lucide-react";
 
 const SignUpPage = () => {
@@ -96,8 +97,8 @@ const SignUpPage = () => {
             {/* Header */}
             <div className="space-y-2">
               <div className="flex items-center justify-center gap-3 mb-2">
-                <div className="w-10 h-10 rounded-xl bg-[#0a8dff] flex items-center justify-center shadow-lg shadow-[#0a8dff]/30">
-                  <Sparkles className="w-5 h-5 text-white" />
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center">
+                  <img src="/logo.png" alt="logo" />
                 </div>
                 <h1 className="text-4xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-[#0a8dff] to-[#0a8dff]">
                   WHISPRR
@@ -309,11 +310,9 @@ const SignUpPage = () => {
                     ) : (
                       <>
                         <span className="text-white font-semibold">
-                          Create Account
+                          Sign Up
                         </span>
-                        <div className="w-5 h-5 bg-white/20 rounded-full flex items-center justify-center">
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
-                        </div>
+                        <LogIn className="text-white" />
                       </>
                     )}
                   </div>

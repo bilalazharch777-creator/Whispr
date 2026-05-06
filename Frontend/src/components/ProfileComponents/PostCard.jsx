@@ -84,8 +84,7 @@ const PostCard = ({ post = {} }) => {
           <div className="w-11 h-11 rounded-full">
             <img
               src={
-                user?.profilePic ||
-                "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                user?.profilePic
               }
               alt={user?.fullName || "User"}
               onError={(e) => {

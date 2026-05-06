@@ -304,3 +304,17 @@ export async function searchPeople(req, res) {
     res.status(500).json({ message: "Server error" });
   }
 }
+
+export const getRandomUsers = async (req, res) => {
+  try {
+    const randomUsers = await User.aggregate([
+      { $match: { _id: { $ne: req.user._id } } },
+      { $sample: { size: 10 } },
+      { $project: { fullName: 1, profilePic: 1 } },
+    ]);
+
+    res.status(200).json(randomUsers);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};

@@ -172,30 +172,24 @@ export const addComment = async (req, res) => {
 };
 export async function getFeed(req, res) {
   try {
-    const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * limit;
 
-    // 1. Get only the friends array — no need to fetch the whole user doc
-    const user = await User.findById(req.user._id).select("friends").lean();
+    const posts = await Post.aggregate([
+      { $sample: { size: limit } },
+      {
+        $lookup: {
+          from: "users",
+          localField: "userId",
+          foreignField: "_id",
+          as: "userId",
+          pipeline: [{ $project: { fullName: 1, profilePic: 1 } }],
+        },
+      },
+      { $unwind: "$userId" },
+      { $project: { __v: 0, updatedAt: 0 } },
+    ]);
 
-    if (!user || user.friends.length === 0) {
-      return res.status(200).json({ posts: [], hasMore: false });
-    }
-
-    // 2. Fetch posts in a single query — no populate, manual lookup only what's needed
-    const posts = await Post.find({ userId: { $in: user.friends } })
-      .sort({ createdAt: -1 })
-      .skip(skip)
-      .limit(limit + 1) // fetch one extra to check if there's a next page
-      .select("-__v -updatedAt")
-      .populate("userId", "fullName profilePic")
-      .lean();
-
-    const hasMore = posts.length > limit;
-    if (hasMore) posts.pop(); // remove the extra one
-
-    return res.status(200).json({ posts, hasMore, page });
+    return res.status(200).json({ posts, hasMore: false, page: 1 });
   } catch (error) {
     console.error("Feed error:", error);
     return res.status(500).json({ message: "Internal server error" });

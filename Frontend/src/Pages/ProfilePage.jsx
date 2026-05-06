@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useParams } from "react-router"; // Import useParams
+import { useParams } from "react-router";
 import { useQuery } from "@tanstack/react-query";
-import { getUserPosts, getUserProfile } from "../lib/api"; // Added getUserProfile for others
+import { getUserPosts, getUserProfile } from "../lib/api";
 
 import ProfileHeader from "../components/ProfileComponents/ProfileHeader";
 import ProfileBio from "../components/ProfileComponents/ProfileBio";
@@ -40,6 +40,12 @@ const ProfilePage = () => {
   });
 
   const posts = postsData?.posts || [];
+  // Derive stats from postsData
+  const totalPosts = postsData?.count || 0;
+  const totalLikes = posts.reduce(
+    (sum, post) => sum + (post.likes?.length || 0),
+    0,
+  );
 
   if (isAuthLoading || isTargetUserLoading) {
     return (
@@ -51,8 +57,8 @@ const ProfilePage = () => {
 
   const userStats = {
     friends: displayUser?.friends?.length || 0,
-    posts: displayUser?.posts?.length || 0,
-    likes: displayUser?.receivedLikes?.length || 0,
+    posts: totalPosts,
+    likes: totalLikes,
   };
 
   const userBio = {

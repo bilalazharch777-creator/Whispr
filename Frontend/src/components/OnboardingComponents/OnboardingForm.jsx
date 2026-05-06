@@ -255,9 +255,6 @@ const OnboardingForm = ({
                     <span className="text-white font-semibold text-sm md:text-base">
                       Complete Profile
                     </span>
-                    <div className="w-4 h-4 md:w-5 md:h-5 bg-white/20 rounded-full flex items-center justify-center">
-                      <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full"></div>
-                    </div>
                   </>
                 )}
               </div>

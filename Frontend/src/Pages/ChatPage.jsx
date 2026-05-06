@@ -59,7 +59,7 @@ const ChatPage = ({ chatClientRef }) => {
   const shouldHideLayout = isMobile && activeChannel;
 
   const content = (
-    <div className={`h-screen ${activeChannel ? "is-chatting" : ""}`}>
+    <div className={`h-dvh ${activeChannel ? "is-chatting" : ""}`}>
       <Chat client={chatClient}>
         <div className="flex h-full">
           {/* LEFT - Chat List */}

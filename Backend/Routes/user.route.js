@@ -10,6 +10,7 @@ import {
   cancelFriendRequest,
   searchPeople,
   getUserProfile,
+  getRandomUsers,
 } from "../Controllers/user.controller.js";
 const router = express.Router();
 
@@ -18,6 +19,7 @@ router.get("/search", searchPeople);
 router.use(protectRoute);
 
 router.get("/", getRecommendedUsers);
+router.get("/story-suggestions", protectRoute, getRandomUsers);
 router.get("/profile/:id", getUserProfile);
 router.get("/friends", getMyFriends);
 

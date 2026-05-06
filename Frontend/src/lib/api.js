@@ -139,3 +139,7 @@ export async function postFeed(page = 1) {
   const response = await axiosInstance.get(`/post/feed?page=${page}&limit=10`);
   return response.data;
 }
+export const getRecommendedStory = async () => {
+  const res = await axiosInstance.get("/users/story-suggestions");
+  return res.data;
+};
