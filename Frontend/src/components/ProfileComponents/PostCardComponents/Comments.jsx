@@ -158,7 +158,7 @@ const Comments = ({ post, onClose }) => {
         </div>
 
         {/* Input Dock - Using base-200 for distinct background */}
-        <div className="p-4 pb-44 lg:pb-16 border-t border-base-300 bg-base-200 shrink-0">
+        <div className="p-4 pb-20 lg:pb-16 border-t border-base-300 bg-base-200 shrink-0">
           <div className="flex items-end gap-2.5 bg-base-100 border border-base-300 rounded-2xl px-3 py-2.5 focus-within:border-primary/40 transition-all">
             <textarea
               ref={textareaRef}

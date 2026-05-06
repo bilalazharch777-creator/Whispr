@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, MessageCircleMore } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { like } from "../../lib/api";
 import LikeButton from "./PostCardComponents/LikeButton";
@@ -83,9 +83,7 @@ const PostCard = ({ post = {} }) => {
         <div className="avatar">
           <div className="w-11 h-11 rounded-full">
             <img
-              src={
-                user?.profilePic
-              }
+              src={user?.profilePic}
               alt={user?.fullName || "User"}
               onError={(e) => {
                 e.target.src =
@@ -170,7 +168,7 @@ const PostCard = ({ post = {} }) => {
       )}
 
       {/* Action Buttons */}
-      <div className="flex justify-around border-t border-base-300 px-4 py-1">
+      <div className="flex items-center justify-between border-t border-base-300 px-2 py-1">
         {/* LikeButton receives lifted state + handler from PostCard */}
         <LikeButton
           isLiked={isLiked}
@@ -180,12 +178,15 @@ const PostCard = ({ post = {} }) => {
         />
 
         <button
-          className={`btn btn-ghost flex-1 gap-2 ${showComments ? "text-[#0a8dff]" : ""}`}
+          className={`btn btn-ghost btn-sm flex-1 gap-2 ${showComments ? "text-[#0a8dff]" : ""}`}
           onClick={() => setShowComments(!showComments)}
         >
-          <span className="text-sm">
+          <span className="text-sm flex gap-2">
             {post?.comments?.length || 0}{" "}
-            {post?.comments?.length === 1 ? "Comment" : "Comments"}
+            <span className="hidden sm:inline">
+              {post?.comments?.length === 1 ? "Comment" : "Comments"}
+            </span>
+            <MessageCircleMore className="sm:hidden" />
           </span>
         </button>
 

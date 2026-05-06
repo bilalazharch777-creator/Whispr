@@ -11,14 +11,18 @@ const LikeButton = ({ isLiked, likeCount, onLike, isLiking }) => {
       onClick={onLike}
       disabled={isLiking}
     >
+      <span className="text-sm font-medium">
+        {likeCount}
+        <span className="hidden sm:inline">
+          {" "}
+          {likeCount === 1 ? "Like" : "Likes"}
+        </span>
+      </span>
       <Heart
         size={20}
         fill={isLiked ? "currentColor" : "none"}
         className={isLiked ? "scale-110 transition-transform" : ""}
       />
-      <span className="text-sm font-medium">
-        {likeCount} {likeCount === 1 ? "Like" : "Likes"}
-      </span>
     </button>
   );
 };
