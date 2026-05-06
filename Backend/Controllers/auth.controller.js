@@ -29,7 +29,7 @@ export async function signup(req, res) {
       });
     }
     const idx = Math.floor(Math.random() * 9) + 1; // use 10 pic from assets folder
-    const randomAvatar = `/public/avatar/image${idx}.jpg`;
+    const randomAvatar = `/image${idx}.jpg`;
 
     const newUser = await User.create({
       fullName,
